@@ -10,11 +10,12 @@ try:
     ssl_verify=False,
     plaintext_login=True
   )
-  dhcp = api.get_resource('/ip/dhcp-server/lease').get()
+  api = con.get_api()
 except:
   print("FAILURE")
   os._exit(1)
 print("Address,MAC-Address,Hostname,Last-Seen,Expires-After")
+dhcp = api.get_resource('/ip/dhcp-server/lease').get()
 for rec in dhcp:
   try:
     hostname = rec['host-name']
